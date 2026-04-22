@@ -1,0 +1,110 @@
+
+
+/* 1. ヘッダー（TOPへ戻る・累計） */
+.result-header {
+    background: #333;
+    color: #fff;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.back-link {
+    color: #fff !important;
+    background: none !important; /* 灰色の背景を削除 */
+    border: none !important;
+    box-shadow: none !important;
+    text-decoration: underline; /* リンクっぽく下線をつけるとおしゃれ */
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* 2. 合否表示（judgment-card）を中央で大きく */
+.judgment-card {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 合否画像のサイズ */
+.pass-fail-image {
+    max-width: 280px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* 合計点数（0/101 など） */
+#total-score-display {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.stats-section {
+    text-align: center;
+}
+
+/* 学科別正解数（スコア詳細）をカード内に収める */
+.score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.score-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 4. 復習リスト */
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #fff;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    border-left: 10px solid #ccc;
+}
+
+.result-row:hover { background: #f0f0f0; transform: translateX(5px); }
+
+.result-row.correct { border-left-color: #4caf50; background-color: #e8f5e9; /* 薄い緑 */}
+.result-row.incorrect { border-left-color: #f44336; background-color: #ffebee; /* 薄い赤 */}
+.result-row.unselected {
+    border-left: 10px solid #9e9e9e !important; /* グレー */
+    background-color: #f5f5f5; /* 薄いグレー */
+    color: #888;
+}
+/* 選択数超過のスタイル */
+.result-row.penalty {
+    border-left: 10px solid #ff8c00 !important; /* 警告のオレンジ */
+    background-color: #fff5e6; /* 薄いオレンジ背景 */
+}
+
+.result-row.penalty .q-status {
+    color: #e67e22;
+    font-weight: bold;
+}
+/* 警告用の赤文字（解きすぎた時用） */
+.text-danger {
+    color: #ff0000;
+    font-weight: bold;
+}
+.q-arrow { color: #2196f3; font-weight: bold; font-size: 0.8rem; }

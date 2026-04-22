@@ -1,0 +1,412 @@
+/* DOBOTRE 勉強モード スタイルシート */
+
+/* 1. 全体レイアウト */
+body.study-body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* 少しグレーで落ち着かせる */
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    overflow-x: hidden;
+}
+
+.index-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 2. ヘッダー（TOPへ戻る・累計） */
+.quiz-header {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-bar {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+}
+
+/* --- ヘッダーレイアウト（バー復活ver） --- */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 110px; /* 高さを少し余裕持たせたよ */
+    z-index: 1000;
+    background: #333;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* 縦方向の中央 */
+    justify-content: space-between;
+}
+
+/* 左右のブロック（幅を均等にして中央を固定） */
+.header-left, .header-right {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* 中央：タイマーセクション */
+.timer-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 時間とバーの隙間 */
+}
+
+#total-time-display {
+    font-size: 1.4rem;
+    font-family: monospace;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* 導火線コンテナ */
+.fuse-timer-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* バーの最大幅 */
+    position: relative;
+    height: 30px; /* 火花がはみ出ない高さ */
+}
+
+/* 導火線の線（ベース） */
+.fuse-wire {
+    position: relative;
+    flex-grow: 1; /* 親の幅いっぱいに広がる */
+    height: 10px;
+    background: #555;
+    border-radius: 5px;
+    margin: 0 10px; /* タイマーアイコンとの隙間 */
+    overflow: visible; /* 火花を見せるために必須！ */
+}
+
+/* ★動くバー本体（指定の色 #b28247） */
+.fuse-fill {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%; /* ここがJSで変わる */
+    height: 100%;
+    background-color: #b28247;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(178, 130, 71, 0.5); /* ほんのり光らせる */
+}
+
+/* timer.pngのサイズ */
+.timer-icon {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+/* spark.png（火花） */
+.spark-icon {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 45px;
+    height: 45px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* メインコンテンツの押し下げ（重要！） */
+.scrollable-content {
+
+}
+
+/* 3. メインコンテンツ（スクロールエリア） */
+.scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 80px; /* 下部固定ボタンに被らないように */
+    padding-top: 130px !important;
+}
+
+.question-meta {
+    text-align: center;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* 看板の外枠 */
+.wood-sign-board {
+    position: relative;
+    max-width: 820px;
+    margin: 20px auto;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    transition: background-image 0.3s ease-in-out;
+}
+
+/* 看板の中身エリア */
+.board-content {
+    padding: 50px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 左寄せ */
+}
+
+/* 縁取りされた問題文 */
+.question-text-on-wood {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #221a10;
+    line-height: 1.7;
+    text-align: left;
+    width: 100%;
+    /* 白い縁取り（これが見やすさの秘訣！） */
+    text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 2px 2px 2px rgba(0,0,0,0.2);
+    margin: 0;
+}
+/* ★図（画像）のサイズ制限：ここが最重要！ */
+#question-img {
+    display: block;
+    max-width: 100%;   /* 親要素（board-content）からはみ出さない */
+    height: auto;      /* 比率は絶対維持！ */
+    object-fit: contain;
+    margin-top: 15px;
+    /* 必要以上に小さくならないよう、かつ巨大化もしない絶妙なサイズ感 */
+    border: 2px solid rgba(255,255,255,0.5);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* --- 選択肢ボタンのデザイン（クリーンな角丸スタイル） --- */
+.choices-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;         /* 画像に合わせて少し広めに */
+    max-width: 820px;  /* 木枠フレームの幅に統一 */
+    margin: 30px auto;
+    padding: 0 20px;   /* スマホ時の端の余白 */
+}
+
+.choice-btn {
+    width: 100%;
+    min-height: 60px;  /* 押しやすさを確保 */
+    padding: 15px 25px;
+    background-color: #ffffff;
+    border: 2px solid #cccccc; /* 画像のような薄いグレーの細枠 */
+    border-radius: 12px;       /* ほどよい角丸 */
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333333;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* ほんの少し影をつけて立体感を */
+}
+
+/* ホバー時の挙動 */
+.choice-btn:hover {
+    background-color: #f9f9f9;
+    border-color: #999999;
+    transform: translateY(-1px); /* 少し浮き上がる演出 */
+}
+
+/* ★選択された時のスタイル（青い太枠） */
+.choice-btn.selected {
+    background-color: #f0f7ff; /* 極薄い青背景 */
+    border-color: #007bff;     /* 鮮やかな青枠 */
+    border-width: 3px;         /* 枠を太くして強調 */
+    color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0,123,255,0.2);
+}
+
+/* 正解した時（緑の枠と背景） */
+.btn-correct {
+    background-color: #e8f5e9 !important;
+    border-color: #28a745 !important;
+    border-width: 3px !important;
+    color: #1b5e20 !important;
+}
+
+/* 不正解だった時（赤の枠と背景） */
+.btn-incorrect {
+    background-color: #fff5f5 !important;
+    border-color: #dc3545 !important;
+    border-width: 3px !important;
+    color: #a71d2a !important;
+}
+
+/* 回答後に他の選択肢を半透明にして正解を際立たせる */
+#choices-container[style*="pointer-events: none"] .choice-btn:not(.btn-correct):not(.btn-incorrect) {
+    opacity: 0.6;
+    filter: grayscale(0.5);
+}
+
+/* 7. 画面下の固定「回答」ボタン（赤丸） */
+/* 7. 回答ボタンのコンテナ（浮遊を解除！） */
+.submit-button-container {
+    text-align: center;
+    margin: 30px auto; /* 選択肢との間にほどよい余白 */
+    width: 100%;
+    max-width: 820px;
+}
+
+.fixed-bottom-nav {
+    display: none;
+}
+
+.btn-answer-main {
+    width: 100px;
+    height: 100px;
+    background-color: #e64a19;
+    color: white;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* 影を少し優しく */
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+    /* 普通の要素として真ん中に配置 */
+    display: inline-block;
+}
+
+.btn-answer-main:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+.btn-answer-main:active {
+    transform: scale(0.9);
+}
+
+.scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 60px; /* 120px から 60px に減らしてスッキリ！ */
+}
+
+/* --- 6. 解説エリア（画像再現スタイル） --- */
+
+.explanation-container {
+    max-width: 820px;
+    margin: 20px auto;
+    padding: 0 20px;
+    position: relative; /* ボタンの配置基準 */
+}
+
+/* 太い区切り線 */
+.result-divider {
+    border: none;
+    border-top: 5px solid #000; /* 黒の太線 */
+    margin-bottom: 20px;
+}
+
+/* --- 判定ヘッダー：横並び設定 --- */
+.result-header {
+    display: flex;
+    justify-content: space-between; /* 両端に振り分ける */
+    align-items: center;           /* 上下中央揃え */
+    margin-bottom: 20px;
+}
+
+/* 正解・不正解メッセージのフォント設定 */
+.correct-msg {
+    color: #0000ff; /* 画像のような青（または緑） */
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+
+.incorrect-msg {
+    color: #ff0000; /* 画像のような赤 */
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+
+/* [解説] ラベル */
+.explanation-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* 解説本文 */
+.explanation-text-box {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding-left: 10px;
+}
+
+/* ★次の問題ボタン（右下に配置） */
+.next-btn-wrapper {
+    text-align: right;
+    margin-top: -40px; /* 解説テキストに被らないように調整 */
+}
+
+.btn-next-custom {
+    width: 140px;        /* 横幅を少しコンパクトに */
+    height: 45px;        /* 高さを抑えてシュッとさせる */
+    background-color: #f0ad4e;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 0 #b07d35;
+    transition: all 0.1s;
+    white-space: nowrap;
+}
+
+.btn-next-custom:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+/* --- モバイル用：選択肢内の画像はみ出し防止 --- */
+@media screen and (max-width: 480px) {
+
+    /* 選択肢ボタンそのものの調整（念のため） */
+    .choice-btn, .res-choice-card {
+        padding: 10px !important;
+        overflow: hidden; /* はみ出た分を隠すお守り */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ★これが本命！ボタンの中にある画像の横幅を制限する */
+    .choice-btn img, .res-choice-card img {
+        max-width: 100% !important; /* ボタンの幅100%を絶対に超えない */
+        height: auto !important;     /* 縦横比は維持して縮小 */
+        object-fit: contain;        /* 枠内に綺麗に収める */
+    }
+}
+
+/* 共通の非表示設定 */
+.hidden { display: none; }

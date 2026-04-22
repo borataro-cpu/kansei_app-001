@@ -1,0 +1,188 @@
+/* ================================================= */
+/* DOBOTRE 復習モード 完全復活・スタイルシート         */
+/* ================================================= */
+
+/* --- 1. 全体レイアウト --- */
+body.study-body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- 2. ヘッダー（黒背景・固定） --- */
+.quiz-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 80px;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-bar {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* --- 3. メインコンテンツの押し下げ --- */
+.scrollable-content {
+    padding-top: 100px !important;
+    padding-bottom: 60px;
+}
+
+.question-meta {
+    text-align: center;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* 看板の外枠（1枚の画像として表示） */
+.wood-sign-board {
+    position: relative;
+    max-width: 820px;
+    margin: 40px auto;
+    background-size: 100% 100%; /* 画像を看板サイズにピッタリ合わせる */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 中身のエリア：看板の縁（フチ）に文字が被らないようにパディングを調整 */
+.board-content {
+    padding: 50px 20px;
+    box-sizing: border-box;
+    min-height: 100px;
+}
+
+/* 板の上に表示する文字 */
+.question-text-on-wood {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #221a10; /* 焦げ茶色（焼印風） */
+    line-height: 1.7;
+
+    text-align: left;
+    text-shadow:
+            1px  1px 0 #fff,
+           -1px -1px 0 #fff,
+            1px -1px 0 #fff,
+           -1px  1px 0 #fff,
+            1px  0   0 #fff,
+           -1px  0   0 #fff,
+            0    1px 0 #fff,
+            0   -1px 0 #fff,
+            2px  2px 2px rgba(0,0,0,0.2); /* 最後にほんのり全体の影を足して浮き立たせる */
+    margin: 0;
+}
+
+/* --- 5. 選択肢カード（中央寄せ・ボタン風） --- */
+#choices-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 820px;
+}
+
+.res-choice-card {
+    width: 100%;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 0 #ddd; /* ボタン風の影 */
+    pointer-events: none;     /* クリック不可 */
+    box-sizing: border-box;
+}
+
+.res-choice-inner { display: flex; align-items: center; width: 100%; }
+
+.res-choice-num {
+    width: 30px; height: 30px;
+    background: #666; color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; margin-right: 20px; flex-shrink: 0;
+}
+
+.res-choice-text { font-size: 1.1rem; font-weight: bold; color: #333; }
+
+/* --- 6. 正誤・選択の色付け --- */
+.res-choice-card.is-user {
+    border-color: #2196f3 !important;
+    background-color: #f0f7ff !important;
+    box-shadow: 0 4px 0 #1976d2 !important;
+}
+.res-choice-card.is-correct {
+    border-color: #4caf50 !important;
+    background-color: #e8f5e9 !important;
+    box-shadow: 0 4px 0 #388e3c !important;
+}
+.res-choice-card.is-user.is-wrong {
+    border-color: #f44336 !important;
+    background-color: #ffebee !important;
+    box-shadow: 0 4px 0 #d32f2f !important;
+}
+
+/* --- 7. 解説エリア --- */
+.explanation-container {
+    max-width: 820px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- モバイル用：選択肢内の画像はみ出し防止 --- */
+@media screen and (max-width: 480px) {
+
+    /* 選択肢ボタンそのものの調整（念のため） */
+    .choice-btn, .res-choice-card {
+        padding: 10px !important;
+        overflow: hidden; /* はみ出た分を隠すお守り */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ★これが本命！ボタンの中にある画像の横幅を制限する */
+    .choice-btn img, .res-choice-card img {
+        max-width: 100% !important; /* ボタンの幅100%を絶対に超えない */
+        height: auto !important;     /* 縦横比は維持して縮小 */
+        object-fit: contain;        /* 枠内に綺麗に収める */
+    }
+}
+
+.result-divider { border: none; border-top: 5px solid #000; margin-bottom: 20px; }
+
+.result-header { margin-bottom: 20px; }
+.correct-msg { color: #0000ff; font-size: 1.8rem; font-weight: 900; }
+.incorrect-msg { color: #ff0000; font-size: 1.8rem; font-weight: 900; }
+
+.explanation-label { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
+.explanation-text-box { font-size: 1.1rem; line-height: 1.6; color: #333; }
+
+/* 共通設定 */
+.hidden { display: none !important; }
+.q-image-area img { max-width: 100%; height: auto; border: 1px solid #ddd; }

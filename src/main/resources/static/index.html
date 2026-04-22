@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOBOTORE - 1級土木施工管理技術検定</title>
+    <link rel="stylesheet" href="css/style_Index.css">
+    <script src="js/auth.js"></script>
+</head>
+<body class="index-body">
+<div class="index-wrapper">
+    <div class="logo-area">
+        <img src="images/dobotre_Logo.png" alt="DOBOTRE LOGO" class="main-logo">
+    </div>
+
+    <div class="mode-container">
+        <div class="mode-card exam-blue">
+            <div class="btn-group">
+                <button class="btn-exam" onclick="startExam('A')">試験問題 A</button>
+                <button class="btn-exam" onclick="startExam('B')">試験問題 B</button>
+                <button class="btn-exam long-btn" onclick="startExam('AB')">試験問題 A / B</button>
+            </div>
+        </div>
+
+        <div class="mode-card study-green">
+            <div class="goal-area">
+                <span class="goal-label">目標正答率</span>
+                <input type="number" id="target-rate" value="60" min="0" max="100">
+            </div>
+
+            <div class="btn-grid">
+                <a href="javascript:void(0)" class="btn-study" onclick="goToStudy('general')">A：一般</a>
+                <a href="javascript:void(0)" class="btn-study" onclick="goToStudy('special')">A：専門</a>
+                <a href="javascript:void(0)" class="btn-study" onclick="goToStudy('law')">A：法規</a>
+                <a href="javascript:void(0)" class="btn-study" onclick="goToStudy('essential')">B：必須</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="index-footer">
+        大阪テクニカルヤード技術課 var[1.0.0]
+    </footer>
+</div>
+
+<script src="js/index_script.js"></script>
+</body>
+</html>

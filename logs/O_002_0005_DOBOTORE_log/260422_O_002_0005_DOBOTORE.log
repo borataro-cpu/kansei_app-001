@@ -1,0 +1,9 @@
+[2026/04/22 10:52:34] [INFO ] Starting DOBOKU1Application using Java 24.0.2 with PID 23816 (C:\Users\722580\Desktop\アプリ開発\１級土木試験対策ツール\DOBOKU1_SkillTest\target\classes started by 722580 in C:\Users\722580\Desktop\アプリ開発\１級土木試験対策ツール\DOBOKU1_SkillTest)
+[2026/04/22 10:52:34] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2026/04/22 10:52:35] [INFO ] DOBOTORE アプリケーションが正常に起動しました。
+[2026/04/22 10:52:35] [WARN ] Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+[2026/04/22 10:52:35] [INFO ] Started DOBOKU1Application in 2.018 seconds (process running for 2.423)
+[2026/04/22 10:53:39] [INFO ] アクセス検知 - IP: 0:0:0:0:0:0:0:1, Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0, Path: /study.html
+[2026/04/22 10:54:16] [INFO ] アクセス検知 - IP: 0:0:0:0:0:0:0:1, Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0, Path: /index.html
+[2026/04/22 10:54:30] [INFO ] DOBOTORE アプリケーションが終了します。
+[2026/04/22 10:54:30] [INFO ] ログを社内サーバーへバックアップしました。

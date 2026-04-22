@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>模擬試験結果 - DOBOTORE</title>
+  <link rel="stylesheet" href="css/style_Result.css">
+</head>
+<body class="result-body">
+<div class="result-wrapper">
+  <header class="result-header">
+    <h1>模擬試験 結果</h1>
+    <button onclick="location.href='index.html'" class="back-link">TOPへ戻る</button>
+  </header>
+
+  <div id="judgment-container" class="judgment-card">
+    <div id="judgment-result-area"></div>
+    <div id="total-score-display">-- / --</div>
+  </div>
+
+  <div class="stats-section">
+    <h2>学科別正解数</h2>
+    <div id="score-details" class="score-grid"></div>
+  </div>
+
+  <div class="review-section">
+    <h2>解答一覧・復習</h2>
+    <div id="review-list"></div>
+  </div>
+</div>
+<script src="js/result_script.js"></script>
+</body>
+</html>

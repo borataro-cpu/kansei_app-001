@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模擬試験モード - DOBOTORE</title>
+    <link rel="stylesheet" href="css/style_Exam.css">
+</head>
+<body>
+<div class="container">
+    <header class="quiz-header fixed-header">
+        <div class="header-left">
+            <a href="index.html" class="back-link">TOPへ戻る</a>
+        </div>
+
+        <div class="timer-section">
+            <div id="total-time-display">02:30:00</div>
+            <div class="fuse-timer-container">
+                <img src="images/timer.png" class="timer-icon" alt="timer">
+                <div class="fuse-wire">
+                    <div id="question-bar" class="fuse-fill"></div>
+                    <img src="images/spark.png" id="spark-img" class="spark-icon" alt="spark">
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="progress-info">
+                <span id="progress-text">1 / -- 問</span>
+                <div id="selection-summary" class="selection-summary"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="scrollable-content">
+
+        <div class="wood-sign-board">
+            <div class="board-content">
+                <h3 id="question-meta" class="question-meta">年度 - No.</h3>
+                <p id="question-text" class="question-text-on-wood">問題読み込み中...</p>
+                <div id="q-image-area" class="q-image-area hidden">
+                    <img id="question-img" src="" alt="問題図">
+                </div>
+            </div>
+        </div>
+
+        <div id="choices-container" class="choices-grid"></div>
+
+        <div class="exam-control-center">
+            <div class="main-nav-row">
+                <button onclick="prevQuestion()" class="btn-exam-side btn-red-retro">戻る</button>
+                <!--<button id="submit-btn" class="btn-answer-main">回答</button>-->
+                <button onclick="nextQuestion()" class="btn-exam-side btn-green-retro">進む</button>
+            </div>
+
+            <div class="jump-row">
+                <div class="jump-input-group">
+                    <select id="jump-dropdown" class="select-retro"></select>
+                    <button onclick="jumpToQuestion()" class="btn-jump-retro">Jamp</button>
+                </div>
+                <button id="finish-exam-btn" class="btn-finish-sub">試験を終了する</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="result-area" class="hidden">
+        <h2>試験結果</h2>
+        <div class="score-box">
+            <span id="score-display">-- / 50</span>
+            <div id="pass-fail-judgment">--</div>
+        </div>
+        <p>お疲れ様でした！</p>
+        <button onclick="location.reload()" class="btn btn-primary">もう一度挑戦する</button>
+    </div>
+</div>
+
+<script src="js/questionsA.js"></script>
+<script src="js/questionsB.js"></script>
+<script src="js/exam_script.js"></script>
+</body>
+</html>
